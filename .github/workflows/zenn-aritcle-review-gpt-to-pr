@@ -1,9 +1,13 @@
 name: Zenn Article Review
 
 on:
-  pull_request:
+  push:
     paths:
       - "articles/*.md"  # Zenn 用の md ファイルがあるパス
+
+permissions:
+  contents: read    # リポジトリの内容を読み取る
+  issues: write    # Issue の作成・編集を許可
 
 jobs:
   gpt-review:
@@ -29,10 +33,13 @@ jobs:
             -H "Authorization: Bearer $OPENAI_API_KEY"
           )
 
+          ISSUE_TITLE="📖 Zenn Articles Review Report"
+          ISSUE_BODY="## Zenn 技術記事のレビュー\n\n### 改善点:\n"
+
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Reviewing $file..."
 
-            CONTENT=$(cat "$file" | head -c 50000)  # 最大 50000 文字を送信
+            CONTENT=$(cat "$file" | head -c 50000)
             PROMPT="以下の Markdown で記述された技術記事をレビューし、どのように修正すればいいか指摘してください。\n\n\`\`\`markdown\n$CONTENT\n\`\`\`\n\n特に以下の点に注意してください:\n- 誤字脱字や文法ミスを指摘すること\n- 読者が初心者から中級者であることを想定して、専門用語の説明を含めること\n- 視覚的に分かりやすい図やイラストを追加する提案をすること\n- 重要なポイントを強調し、要点をまとめること\n- 個人的な見解や感想は、客観的事実と異なると分かるようにすること"
 
             PAYLOAD=$(jq -n --arg prompt "$PROMPT" '{
@@ -51,64 +58,19 @@ jobs:
               exit 1
             fi
 
-            echo "$RESPONSE" | jq -r '.choices[0].message.content' > review_$file.md
-
-            PR_NUMBER=$(echo $GITHUB_REF | awk -F'/' '{print $3}')
-            COMMENT_BODY="### Review for $file 📄\n\n$(cat review_$file.md)"
-
-            gh pr comment $PR_NUMBER --body "$COMMENT_BODY"
+            REVIEW_TEXT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+            ISSUE_BODY+="### 📄 $file\n$REVIEW_TEXT\n\n---\n"
           done
 
-  external_text_suggest:
-    needs: gpt-review
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+          echo "$ISSUE_BODY" > issue_body.md
 
-      - name: Get changed markdown files
-        id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: articles/*.md
+          # Check if an existing issue exists
+          EXISTING_ISSUE=$(gh issue list --repo $GITHUB_REPOSITORY --state=open --search "$ISSUE_TITLE" --json number --jq '.[0].number')
 
-      - name: Get Writing Advice for each markdown file
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          BASE_URL="https://api.openai.com/v1/chat/completions"
-          HEADERS=(
-            -H "Content-Type: application/json"
-            -H "Authorization: Bearer $OPENAI_API_KEY"
-          )
-
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "Generating writing advice for $file..."
-
-            CONTENT=$(cat "$file" | head -c 50000)  # 最大 50000 文字を送信
-            PROMPT="現在執筆中の Markdown で記述された技術記事の内容を元に、今後どのような内容を追加すべきかアドバイスしてください。\n\n\`\`\`markdown\n$CONTENT\n\`\`\`\n\n以下の点に重点を置いてください:\n- 現在の内容に不足している論点\n- 読者がより理解しやすくなる説明の追加提案\n- 事例やデータの引用の推奨\n- 全体の構成をより論理的にするための改善点\n- 追加すべき図表や視覚的要素の提案"
-
-            PAYLOAD=$(jq -n --arg prompt "$PROMPT" '{
-              model: "gpt-4o-mini",
-              messages: [
-                {role: "system", content: "あなたは技術記事の執筆アドバイザーです。"},
-                {role: "user", content: $prompt}
-              ],
-              temperature: 0.5
-            }')
-
-            RESPONSE=$(curl -s -X POST "$BASE_URL" "${HEADERS[@]}" -d "$PAYLOAD")
-
-            if [ -z "$RESPONSE" ]; then
-              echo "Error: No response from OpenAI API" >&2
-              exit 1
-            fi
-
-            echo "$RESPONSE" | jq -r '.choices[0].message.content' > advice_$file.md
-
-            PR_NUMBER=$(echo $GITHUB_REF | awk -F'/' '{print $3}')
-            COMMENT_BODY="### Writing Advice for $file 📖\n\n$(cat advice_$file.md)"
-
-            gh pr comment $PR_NUMBER --body "$COMMENT_BODY"
-          done
+          if [ -n "$EXISTING_ISSUE" ]; then
+            echo "Updating existing issue #$EXISTING_ISSUE"
+            gh issue edit "$EXISTING_ISSUE" --body "$ISSUE_BODY"
+          else
+            echo "Creating a new issue"
+            gh issue create --title "$ISSUE_TITLE" --body "$ISSUE_BODY"
+          fi
