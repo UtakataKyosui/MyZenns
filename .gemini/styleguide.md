@@ -33,4 +33,4 @@
 例文
 :::
 
-レスポンスには必ず日本語を使ってください。
+You Must Create Response Language JAPANISE LANGUAGE
