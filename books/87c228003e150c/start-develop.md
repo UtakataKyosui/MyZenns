@@ -6,7 +6,7 @@ title: "開発を始める -start_develop-"
 
 ## 開発対象
 
-![Axumのサンプルコードリポジトリ](https://github.com/tokio-rs/axum/tree/main/examples)
+https://github.com/tokio-rs/axum/tree/main/examples
 
 今回は、Axum公式が公開している、TodoアプリのAPIのAxum実装のサンプルを
 Locoでリファクタリングした上で、Locoに搭載されている高度な機能を使って、
@@ -21,7 +21,7 @@ Locoでリファクタリングした上で、Locoに搭載されている高度
 | `/todos` | GET | JSON形式で登録されているTodoを返す |
 | `/todos` | POST | Todoの新規作成 | 
 | `/todos/{id}` | PATCH | Todoの内容の更新 |
-| `/todos/{id}` | POST | Todoの削除 | 
+| `/todos/{id}` | DELETE | Todoの削除 | 
 
 Todoデータを管理するDBに関しては、以下のように宣言されています。
 ```rust
