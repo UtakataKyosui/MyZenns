@@ -6,7 +6,7 @@ title: "開発を始める -start_develop-"
 
 ## 開発対象
 
-https://github.com/tokio-rs/axum/tree/main/examples
+![Axumのサンプルコードリポジトリ](https://github.com/tokio-rs/axum/tree/main/examples)
 
 今回は、Axum公式が公開している、TodoアプリのAPIのAxum実装のサンプルを
 Locoでリファクタリングした上で、Locoに搭載されている高度な機能を使って、
