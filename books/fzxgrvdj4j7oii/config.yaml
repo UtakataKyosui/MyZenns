@@ -1,0 +1,17 @@
+title: "Claude Codeの使い方をアップグレードする【T3Stack + Drizzle + BetterAuth実践編】"
+summary: "Claude Codeを使った個人開発を劇的に効率化する実践的なガイド。改良版T3Stack（Drizzle + BetterAuth）での開発事例を通じて、初心者から上級者へのステップアップを支援します。"
+topics: ["claude", "ai", "development", "t3stack", "drizzle", "betterauth", "typescript"]
+published: false
+price: 2000 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - prerequisites
+  - document-setup
+  - basic-usage
+  - prompting-techniques
+  - project-configuration
+  - advanced-techniques
+  - t3stack-case-study
+  - troubleshooting
+  - conclusion
