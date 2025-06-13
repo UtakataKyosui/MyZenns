@@ -1,0 +1,28 @@
+# .gemini/config.yaml
+code_review:
+  disable: false
+  # Markdownファイルのみを対象とする
+  # Zennの記事は通常 .md 拡張子を持つ
+  # もし他の拡張子 (例: .zenn.md) を使う場合は適宜追加
+  include_patterns:
+    - "**/*.md" 
+  # コードレビューのコメント粒度を調整
+  # Zenn記事のレビューなので、多少厳しめにしても良いかもしれません
+  comment_severity_threshold: LOW # または MEDIUM
+  max_review_comments: 20 # 記事の長さに応じて調整
+
+  # プルリクエストオープン時の挙動
+  pull_request_opened:
+    help: false
+    summary: true # 記事の変更概要を生成する（あれば便利）
+    code_review: true # レビューを実行する
+
+ignore_patterns:
+  # Zenn記事以外のファイルやディレクトリを無視する
+  - "**.py"
+  - "**.js"
+  - "**.ts"
+  - "node_modules/"
+  - "dist/"
+  - ".git/"
+  - "images/" # 記事内の画像ファイルは無視する
