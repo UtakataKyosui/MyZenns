@@ -3,7 +3,7 @@ title: "そもそもホストOSで動かさない！DevContainer上でClaude Cod
 emoji: "🛡️"
 type: "idea"
 topics: ["claude", "devcontainer", "docker", "security", "ai"]
-published: false
+published: true
 ---
 
 ## はじめに
