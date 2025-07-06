@@ -1,0 +1,3 @@
+[submodule "temp-devcontainer"]
+	path = temp-devcontainer
+	url = https://github.com/UtakataKyosui/TypeScriptWithClaudeCodeDevContainer.git
