@@ -13,12 +13,12 @@
             "state": {
               "type": "split-diff-view",
               "state": {
-                "aFile": ".obsidian/community-plugins.json",
-                "bFile": ".obsidian/community-plugins.json",
+                "aFile": ".obsidian/plugins/obsidian-notes-from-template/data.json",
+                "bFile": ".obsidian/plugins/obsidian-notes-from-template/data.json",
                 "aRef": ""
               },
               "icon": "diff",
-              "title": "Diff: community-plugins.json"
+              "title": "Diff: data.json"
             }
           }
         ]
@@ -107,16 +107,17 @@
             }
           },
           {
-            "id": "4c66663b3b7c73db",
+            "id": "fdc47f25a0f85143",
             "type": "leaf",
             "state": {
-              "type": "outgoing-link",
+              "type": "outline",
               "state": {
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
-              "icon": "links-going-out",
-              "title": "アウトゴーイングリンク"
+              "icon": "lucide-list",
+              "title": "アウトライン"
             }
           },
           {
@@ -135,7 +136,30 @@
             }
           },
           {
-            "id": "ee5883dac9e25a05",
+            "id": "0b2bb24f579c9f69",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          },
+          {
+            "id": "b73b5fbccc0237f1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "アウトゴーイングリンク"
+            }
+          },
+          {
+            "id": "08797d4607df3755",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -147,19 +171,9 @@
               "icon": "lucide-list",
               "title": "アウトライン"
             }
-          },
-          {
-            "id": "0b2bb24f579c9f69",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -179,6 +193,12 @@
   "active": "0a3b2a8c78850ef6",
   "lastOpenFiles": [
     "articles/claude-code-devcontainer-safety.md",
+    "Template/tech.md",
+    "Template/idea.md",
+    "articles/latex-assistant.md",
+    "articles/wgpu-winit-v3.md",
+    "articles/テスト.md",
+    "Template",
     "CLAUDE.md",
     "README.md"
   ]
