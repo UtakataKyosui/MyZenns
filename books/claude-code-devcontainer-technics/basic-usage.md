@@ -17,27 +17,6 @@ Claude Codeを使い始めたばかりの人って、「とりあえず動いて
 3. **Web検索**: リアルタイムの情報取得
 4. **プロジェクト理解**: コードベース全体の把握
 5. **Git操作**: コミット、プッシュ、プルリクエスト作成
-
-### T3Stack開発での活用例
-
-例えば、T3Stack（Drizzle + BetterAuth）のプロジェクトで以下のようなことができます：
-
-```bash
-# Drizzleスキーマの生成
-npm run db:generate
-
-# 新しいtRPCルーターの作成
-# src/server/api/routers/user.ts を作成
-
-# BetterAuthの設定更新
-# src/lib/auth.ts の設定変更
-
-# テストの実行
-npm run test
-```
-
-これら全部をClaude Codeに任せることができるんです。
-
 ## 最初に覚えとく基本コマンド
 
 ### `/help` - ヘルプを見る
