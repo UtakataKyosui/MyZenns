@@ -1,13 +1,4 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
----
-
----
 name: Zenn記事作成
 about: Zennの記事を作成するためのIssueテンプレート
 title: "[Zenn:記事] タイトルを入力"
