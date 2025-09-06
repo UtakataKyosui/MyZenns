@@ -1,0 +1,19 @@
+title: "次世代のRails,RustのRails。Loco "
+summary: "Rustでバックエンドを書く時がついにきた。"
+topics: ["rust","rails","axum"]
+published: false
+price: 2000 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - beginning
+  - architecture
+  - workers
+  - tasks
+  - scheduler
+  - scheduler-task
+  - storage
+  - start-develop
+  - create-model-controller
+  - test
+  - swagger
+  - deploy
