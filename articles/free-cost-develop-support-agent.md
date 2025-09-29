@@ -152,7 +152,7 @@ MCPを設定してみよう
 
 ログにはしっかりと
 ```sh
-Sequential-Thinking_sequentialthinking %!s(bool=false) (...
+Sequential-Thinking_sequentialthinking (... 
 {
   "thoughtNumber": 5,
   "totalThoughts": 5,
